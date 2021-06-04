@@ -34,7 +34,7 @@ int Kadane(vector<int> v) {
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    vi v{1,-1,3,-2,4,-4,2};
+    vi v {1,-1,3,-2,4,-4,2};
     cout << Kadane(v) << endl;
     return 0;
 }
