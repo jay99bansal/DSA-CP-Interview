@@ -117,8 +117,27 @@ struct Node* mergeSortedLL(struct Node* head1, struct Node* head2) {
 // O(n) INPLACE algorithm to merge two sorted linked lists
 // denoted by head pointers "head1" and "head2"
 struct Node* mergeSortedInplaceLL(struct Node* head1, struct Node* head2) {
-    // HW for 7th June 
+    struct Node* trav1 = head1;         // merged linked list
+    struct Node* trav2 = head2;         // next element of the ll currently not in use
+    
+    if(trav1 == NULL)   return trav2;   // LL1 is empty
+    if(trav2 == NULL)   return trav1;   // LL2 is empty
+    
+    if(trav2->data < trav1->data) 
+        swap(trav1, trav2);
+    struct Node* mergedLLPtr = trav1;
+    struct Node* prevTrav1 = trav1;
 
+    while(trav1 != NULL && trav2 != NULL) {
+        while(trav1 != NULL && trav1->data <= trav2->data) {
+            prevTrav1 = trav1;
+            trav1 = trav1->next;
+        }
+        prevTrav1->next = trav2;
+        swap(trav1, trav2);
+    }
+
+    return mergedLLPtr;
 }
 
 
@@ -150,7 +169,7 @@ int main() {
     head2 = insertAtEndLL(6, head2);
     // 0 3 4 6
 
-    struct Node* head3 = mergeSortedLL(head1, head2);
+    struct Node* head3 = mergeSortedInplaceLL(head1, head2);
     displayLL(head3);
     // 0 1 3 3 3 4 5 6
 
