@@ -11,6 +11,7 @@ using namespace std;
  * Function to Insert a node to a Linked List
  * Function to Display a Linked list
  * Functions to:
+ *  - Count number of nodes in a linked list
  *  - Insert an element to end of a linked list
  *  - Insert an element to begin of a linked list
  *  - Insert an element at nth position in a linked list

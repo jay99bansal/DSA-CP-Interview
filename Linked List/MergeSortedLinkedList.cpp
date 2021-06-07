@@ -11,9 +11,9 @@ using namespace std;
  * Function to Insert a node to a Linked List
  * Function to Display a Linked list
  * Functions to:
- *  - Reverse a linked list using iteration
- *  - Reverse a linked list using recursive routine
- * 
+ *  - Merge two sorted linked lists in O(n) by creating a new linked list
+ *  - Merge two sorted linked lists in O(n) using inplace merging
+ *      (without extra space)
  */
 
 
@@ -50,39 +50,9 @@ struct Node* insertAtEndLL(int val, struct Node* head) {
 }
 
 
-// Iterative function to reverse a linked list
-// denoted by head pointer "head"
-struct Node* reverseIter(struct Node* head) {
-    // Linked list contains 0 or 1 elements 
-    if(head == NULL || head->next == NULL)
-        return head;
-
-    struct Node* prevPtr = NULL;
-    struct Node* trav = head;
-
-    // using head as a temporary variable to store pointers
-    while(trav!=NULL) {
-        head = trav->next;
-        trav->next = prevPtr;
-        prevPtr = trav;
-        trav = head;
-    }
-    return prevPtr;
-}
-
-
-// Recursive function to reverse a linked list
-// denoted by head pointer "head"
-struct Node* reverseRecurs(struct Node* currNode, struct Node* prevNode) {
-    if(currNode == NULL)
-        return prevNode;
-    struct Node* temp = currNode->next;
-    currNode->next = prevNode; // main step for reversal
-    return reverseRecurs(temp, currNode);
-}
-
-
-
+// O(n) algorithm to merge two sorted linked lists
+// with extra space of O(n), creating a new linked list
+// and returning pointer to it!
 struct Node* mergeSortedLL(struct Node* head1, struct Node* head2) {
     struct Node* newLL = NULL;
     struct Node* trav1 = head1;
@@ -141,6 +111,14 @@ struct Node* mergeSortedLL(struct Node* head1, struct Node* head2) {
         }
     }
     return newLL;
+}
+
+
+// O(n) INPLACE algorithm to merge two sorted linked lists
+// denoted by head pointers "head1" and "head2"
+struct Node* mergeSortedInplaceLL(struct Node* head1, struct Node* head2) {
+    // HW for 7th June 
+
 }
 
 
