@@ -114,8 +114,45 @@ void displayMiddleElement2(struct Node* head) {
 // in a linked list denoted by head ptr "head"
 // in one pass
 struct Node* deleteMiddleElement(struct Node* head) {
-    // HW for Jun 8
+    struct Node* trav1 = head;  // slow pointer
+    struct Node* trav2 = head;  // fast pointer
+    struct Node* lastTrav1 = NULL;
+    // Empty linked list 
+    if(head == NULL)
+        return NULL;
 
+    while(trav2->next!=NULL && trav2->next->next!=NULL) {
+        trav2 = trav2->next->next;
+        lastTrav1 = trav1;
+        trav1 = trav1->next;
+    }
+    
+    // Odd number of elements case
+    if(trav2->next == NULL) {
+        // only 1 element in linked list
+        if(lastTrav1 == NULL) {
+            free(trav1);
+            return lastTrav1;
+        }
+
+        lastTrav1->next = trav1->next;
+        free(trav1);
+    }
+
+    // Even number of nodes case
+    else {
+        // only 2 elements in linked list
+        if(lastTrav1 == NULL) {
+            free(trav1->next);
+            free(trav1);
+            return lastTrav1;
+        }
+
+        lastTrav1->next = trav1->next->next;
+        free(trav1->next);
+        free(trav1);
+    }
+    return head;
 }
 
 // Function to display a linked list with head pointer "head"
@@ -139,6 +176,13 @@ int main() {
     // 1 3 3 5
     cout << "LL1 : ";
     displayMiddleElement2(head1);
+    // 3 and 3
+    head1 = deleteMiddleElement(head1);
+    displayLL(head1);
+    // 1 5
+    head1 = deleteMiddleElement(head1);
+    displayLL(head1);
+    // 
 
     struct Node* head2 = NULL;
     head2 = insertAtEndLL(0, head2);
@@ -149,7 +193,16 @@ int main() {
     // 0 3 4 6 7
     cout << "LL2 : ";
     displayMiddleElement2(head2);
-    
+    head2 = deleteMiddleElement(head2);
+    displayLL(head2);
+    // 0 3 6 7
+    head2 = deleteMiddleElement(head2);
+    displayLL(head2);
+    // 0 7
+    head2 = deleteMiddleElement(head2);
+    displayLL(head2);
+    // 
+
     return 0;
 }
 
