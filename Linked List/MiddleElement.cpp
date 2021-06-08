@@ -12,7 +12,7 @@ using namespace std;
  * Function to count the elements in a linked list
  * Function to Display a Linked list
  * Functions to:
- *  - Find and display middle element in linked list
+ *  - Find and display middle element in linked list (using 2 approaches)
  *  - Delete middle element in linked list
  *      
  */
