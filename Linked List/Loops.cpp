@@ -69,7 +69,17 @@ struct Node* initLL(vector<int> &a) {
 // Detect loops in a linked list
 // denoted by head pointer "head"
 bool detectLoopsLL(struct Node* head) {
-    // Will do in class today
+    unordered_set<struct Node*> visited;
+    struct Node* trav = head;
+    while(trav!=NULL) {
+        // Loop found
+        if(visited.find(trav) != visited.end()) 
+            return true;
+        visited.insert(trav);
+        trav = trav->next;
+    }
+    // Loop not found
+    return false;
 }
 
 
@@ -77,7 +87,19 @@ bool detectLoopsLL(struct Node* head) {
 // denoted by head pointer "head"
 // without using extra space
 bool detectLoopsLL2(struct Node* head) {
-    // Will do in class today
+    struct Node* trav1 = head, *trav2 = head;
+    // trav1 - slow pointer
+    // trav2 - fast fointer
+
+    while(trav2 != NULL && trav2->next != NULL) {
+        trav1 = trav1->next;
+        trav2 = trav2->next->next;
+        // loop detected
+        if(trav1 == trav2)
+            return true;
+    }
+    // no loop detected
+    return false;
 }
 
 
@@ -92,7 +114,7 @@ void removeLoopsLL(struct Node* head) {
 // denoted by head pointer "head"
 // in one pass of Linked list
 void removeLoopsLL2(struct Node* head) {
-    // HW for Jun 10
+    // Will do in class today
 }
 
 
@@ -113,7 +135,13 @@ int main() {
     struct Node* head = initLL(v);
     displayLL(head);
     // 1 2 3 4 5 6
+    cout << detectLoopsLL2(head) << endl;
     
+    // Adding a loop in linked list
+    head->next->next->next->next->next->next = head->next->next;
+    cout << detectLoopsLL2(head) << endl;
+    displayLL(head);
+
 
     return 0;
 }
